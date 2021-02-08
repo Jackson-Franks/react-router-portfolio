@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-function App() {
+import Home from './components/pages/Home'
+import Blog from './components/pages/Blog'
+import About from './components/pages/About'
+import NavBar from './components/partials/NavBar'
+import Projects from './components/pages/Projects'
+
+class App extends Component {
+  
+  render(){
+    let post = [
+      {
+      title: 'WoW',
+      body: 'This guy stomped my face with his Bone Reavers Edge. Absolutely one shotted me'
+      },
+      {
+        title: 'CoD',
+        body: 'He is not fair. He 360 no scopes me every time i play him'
+      },
+      {
+        title: 'Minecraft',
+        body: 'He builds nice little houses'
+      }
+    ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Route exact path='/' component={Home} />
+        <Route path='/blog' render={() => <Blog post={post}/>} />
+        <Route path='/projects' component={Projects} />
+        <Route path='/about' component={About} />
+      </div>
+      </Router>
   );
+  }
 }
 
 export default App;
